@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="../vue.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <div v-if="user.isClient">É cliente</div>
+      <div v-show="user.age >= 18">Usuário maior de idade</div>
+      <a :href="user.profileLink">Link do perfil</a>
+    </div>
+    <script>
+      const vm = new Vue({
+        el: "#app",
+        data: {
+          user: {
+            name: "Spencer",
+            age: 20,
+            isClient: true,
+            profileLink: "https://www.profile.com",
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
