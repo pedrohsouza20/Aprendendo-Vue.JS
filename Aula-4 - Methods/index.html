@@ -14,10 +14,10 @@
 <body>
   <div id="app">
 
-    <p>latestTime: {{acoes.latestTime}}</p>
-    <p>latestPrice: {{acoes.latestPrice}}</p>
-    <p>companyName: {{acoes.companyName}}</p>
-    <button @click="puxarAcoes">Puxar Ações</button>
+    <p>latestTime: {{actions.latestTime}}</p>
+    <p>latestPrice: {{actions.latestPrice}}</p>
+    <p>companyName: {{actions.companyName}}</p>
+    <button @click="getActions">Puxar Ações</button>
   </div>
   <!--
   Utilizando a API
@@ -35,14 +35,14 @@
     const vm = new Vue({
       el: "#app",
       data: {
-        acoes: {},
+        actions: {},
       },
       methods: {
-        puxarAcoes() {
+        getActions() {
           fetch("https://cloud.iexapis.com/stable/stock/aapl/quote?token=TOKENAQUI")
             .then(response => response.json())
             .then(json => {
-              this.acoes = json;
+              this.actions = json;
             })
         }
       }
