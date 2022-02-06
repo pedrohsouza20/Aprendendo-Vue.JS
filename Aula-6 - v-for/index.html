@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="../vue.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <!--v-for using Array-->
+      <ul>
+        <li v-for="(language, index) in languagesList">
+          <span>{{ index + 1 }}: {{ language }}</span>
+        </li>
+      </ul>
+
+      <button @click="addItem">Adicionar tecnologia</button>
+      <button @click="removeItem">Remover último</button>
+
+      <!--v-for using Object-->
+      <ul>
+        <li v-for="({sign, name}, key) in states">{{ sign }} - {{ name }}</li>
+      </ul>
+    </div>
+    <script>
+      const vm = new Vue({
+        el: "#app",
+        data: {
+          languagesList: ["HTML5", "CSS3", "JavaScript", "PHP", "Python"],
+          states: {
+            mg: { id: 1, sign: "MG", name: "Minas Gerais" },
+            sp: { id: 2, sign: "SP", name: "São Paulo" },
+            rj: { id: 3, sign: "RJ", name: "Rio de Janeiro" },
+          },
+        },
+        methods: {
+          removeItem() {
+            this.languagesList.pop();
+          },
+          addItem() {
+            //used for add reactive when change an Array directly
+            this.$set(this.languagesList, 0, "Outra tecnologia");
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
