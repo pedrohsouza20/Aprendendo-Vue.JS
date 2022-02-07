@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="../vue.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <!--Utilizando a API:
+    https://viacep.com.br/ws/cep/json,
+    mostre o CEP, logradouro, complemento, bairro, localidade, e UF do que for retornado-->
+    <div id="app">
+      <div class="adress-infos">
+        <input type="text" placeholder="Rua" v-model="street" />
+        <input type="text" placeholder="Bairro" v-model="neighboorhood" />
+        <input type="text" placeholder="Localidade" v-model="city" />
+        <input type="text" placeholder="UF" v-model="uf" />
+        <input  @mousedown="getAdressByCEP()" type="text" placeholder="CEP" v-model="cep" />
+        <button @click="getAdressByCEP()">Completar com CEP</button>
+      </div>
+    </div>
+    <script>
+      const vm = new Vue({
+        el: "#app",
+        data: {
+          cep: "",
+          street: "",
+          adicionalInfo: "",
+          neighboorhood: "",
+          city: "",
+          state: "",
+          uf: "",
+        },
+        methods: {
+          getAdressByCEP(cep) {
+            fetch(`https://viacep.com.br/ws/${this.cep}/json`)
+              .then((res) => {
+                return res.json();
+              })
+              .then((data) => {
+                console.log(data);
+                this.street = data.logradouro;
+                this.adicionalInfo = data.complemento;
+                this.neighboorhood = data.bairro;
+                this.city = data.localidade;
+                this.uf = data.uf;
+              });
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
